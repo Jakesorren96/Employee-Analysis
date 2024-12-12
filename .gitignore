@@ -1,18 +1,25 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+SELECT 
+    e.Position,
+    e.FirstName,
+    e.LastName,
+    m.Position AS ReportsToPosition
+FROM 
+    Employees e
+JOIN 
+    Employees m ON e.ReportsTo = m.EmployeeID
 
-# Other files and folders
-.settings/
+ORDER BY 
+    m.Position          -- Order by the Position of the person they report to
+    e.Position ;         -- Then by the individual's Position in ascending order
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+SELECT emp.Position AS Position,
+ emp.FirstName AS FirstName,
+ emp.LastName AS LastName,
+ mgr.Position AS ReportsToPosition
+FROM maintable_A1GUR emp
+JOIN maintable_A1GUR mgr
+ON emp.ReportsTo = mgr.EmployeeID
+WHERE emp.ReportsTo IS NOT NULL
+ORDER BY mgr.Position ASC,
+         emp.Position ASC;
